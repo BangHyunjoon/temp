@@ -1,0 +1,2 @@
+print "G_MEMCACHE|", GBL_MEM_FILE_PAGE_CACHE
+print "-----"

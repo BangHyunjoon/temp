@@ -1,0 +1,22 @@
+#!/bin/sh
+
+echo "#! /bin/sh" >> $2
+echo "touch /rst_cka_$3" >> $2
+
+echo "LIMIT_CNT=0" >> $2
+
+echo "case \"\$1\" in" >> $2
+echo "'start')" >> $2
+echo "    touch /rst_ckb_$3" >> $2
+echo "    /etc/$1" >> $2
+echo "    sleep 3 " >> $2
+echo "        ;;" >> $2
+echo "'stop')" >> $2
+echo "        ;;" >> $2
+echo "*)" >> $2
+echo "        exit 1" >> $2
+echo "        ;;" >> $2
+echo "esac" >> $2
+echo "exit 0" >> $2
+
+exit 0

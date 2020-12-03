@@ -1,0 +1,265 @@
+#import xmlrpclib 
+#import subprocess 
+import sys 
+import string
+import time
+
+ 
+#VDSM_DIR = '/usr/share/vdsm' 
+#VDSM_CONF = '/etc/vdsm/vdsm.conf' 
+ 
+#try: 
+#    sys.path.append(VDSM_DIR) 
+#    from config import config 
+#    sys.path.pop() 
+#    config.read(VDSM_CONF) 
+#except: 
+#    # VDSM not available 
+#    raise ImportError('local vdsm not found') 
+ 
+#def getTrustStorePath(): 
+#    tsPath = None 
+#    if config.getboolean('vars', 'ssl'): 
+#        tsPath = config.get('vars', 'trust_store_path') 
+#    return tsPath 
+ 
+#def getLocalVdsName(tsPath): 
+#    p = subprocess.Popen(['/usr/bin/openssl', 'x509', '-noout', '-subject', '-in', 
+#            '%s/certs/vdsmcert.pem' % tsPath], 
+#            stdout=subprocess.PIPE, close_fds=True) 
+#    out, err = p.communicate() 
+#    if p.returncode != 0: 
+#        return '0' 
+#    return out.split('=')[-1].strip() 
+ 
+#def connect(): 
+#    tsPath = getTrustStorePath() 
+#    port = config.get('addresses', 'management_port') 
+#    if tsPath: 
+#        addr = getLocalVdsName(tsPath) 
+#        from M2Crypto.m2xmlrpclib import SSL_Transport 
+#        from M2Crypto import SSL 
+ 
+#        KEYFILE = tsPath + '/keys/vdsmkey.pem' 
+#        CERTFILE = tsPath + '/certs/vdsmcert.pem' 
+#        CACERT = tsPath + '/certs/cacert.pem' 
+ 
+#        ctx = SSL.Context ('sslv3') 
+ 
+#        ctx.set_verify(SSL.verify_peer | SSL.verify_fail_if_no_peer_cert, 16) 
+#        ctx.load_verify_locations(CACERT) 
+#        ctx.load_cert(CERTFILE, KEYFILE) 
+ 
+#        server = xmlrpclib.Server('https://%s:%s' % (addr, port), 
+#                                SSL_Transport(ctx)) 
+#    else: 
+#        server = xmlrpclib.Server('http://localhost:%s' % port) 
+#    return server 
+ 
+if __name__ == '__main__':
+    #server = connect()
+    #response = server.list(True)
+
+    global DEBUG_PRINT
+
+    DEBUG_PRINT = 0
+    response = {'status': {'message': 'Done', 'code': 0}, 'vmList': [{'bridge': 'PUB000_IL2_L11B,NAS011_IL2_L103', 'acpiEnable': 'true', 'emulatedMachine': 'rhel5.5.0', 'tabletEnable': 'true', 'vmId': 'dd1090a5-64ac-45b8-b1d2-9f8248393525', 'timeOffset': '+32400', 'displaySecurePort': '5886', 'spiceSslCipherSuite': 'DEFAULT', 'cpuType': 'qemu64,+sse2,+cx16,+ssse3,+sse4.1,+sse4.2,+popcnt', 'ifid': '14', 'executable': '/usr/libexec/qemu-kvm -no-hpet', 'macAddr': '00:1a:4a:4e:3f:08,00:1a:4a:4e:3f:0b', 'displayType': 'vnc', 'irqChip': 'true', 'boot': 'c', 'smp': '2', 'vmType': 'kvm', 'memSize': 2048, 'ifname': '14', 'smpCoresPerSocket': '2', 'vmName': 'BKPLRH5602V', 'spiceMonitors': '1', 'nice': '0', 'status': 'Up', 'pid': '18996', 'displayIp': '0', 'drives': [{'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '2147483648', 'format': 'cow', 'bus': '0', 'boot': 'true', 'volumeID': '9d024907-113f-4ed6-a747-d9f6cbc96f9d', 'imageID': '59c4900b-8edf-4eb8-bf3c-f09a6f284b95', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'reqsize': '2048', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/59c4900b-8edf-4eb8-bf3c-f09a6f284b95/9d024907-113f-4ed6-a747-d9f6cbc96f9d', 'truesize': '2147483648', 'serial': 'b8-bf3c-f09a6f284b95', 'if': 'virtio'}], 'tdf': 'true', 'displayPort': '5914', 'spiceSecureChannels': 'smain,sinputs', 'nicModel': 'pv,pv', 'keyboardLayout': 'en-us', 'kvmEnable': 'true', 'pitReinjection': 'false', 'clientIp': '', 'display': '14'}, {'bridge': 'PUB000_IL2_L111', 'acpiEnable': 'true', 'emulatedMachine': 'rhel5.5.0', 'tabletEnable': 'true', 'vmId': '2864b28b-dbbc-4e5d-918a-fab4fea46fb4', 'timeOffset': '32397', 'displaySecurePort': '5885', 'spiceSslCipherSuite': 'DEFAULT', 'cpuType': 'qemu64,+sse2,+cx16,+ssse3,+sse4.1,+sse4.2,+popcnt', 'ifid': '15', 'executable': '/usr/libexec/qemu-kvm -no-hpet', 'macAddr': '00:1a:4a:4e:3f:09', 'displayType': 'vnc', 'irqChip': 'true', 'boot': 'c', 'smp': '2', 'vmType': 'kvm', 'memSize': 2048, 'ifname': '15', 'smpCoresPerSocket': '2', 'vmName': 'LGEWOOLX01V', 'spiceMonitors': '1', 'nice': '0', 'status': 'Up', 'pid': '20172', 'displayIp': '0', 'drives': [{'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '64424509440', 'format': 'raw', 'bus': '0', 'boot': 'true', 'volumeID': '9434d8e5-a7e2-4903-b85f-584b22768641', 'imageID': '50b25386-3503-4ffc-bb07-29b334916ec1', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/50b25386-3503-4ffc-bb07-29b334916ec1/9434d8e5-a7e2-4903-b85f-584b22768641', 'serial': 'fc-bb07-29b334916ec1', 'truesize': '64424509440', 'if': 'virtio'}, {'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '32212254720', 'format': 'raw', 'bus': '1', 'boot': 'false', 'volumeID': '59485aaf-ae56-4021-8a85-2fa7c04ba4eb', 'imageID': '18222642-1882-4126-8cc6-a1a7823a91bf', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/18222642-1882-4126-8cc6-a1a7823a91bf/59485aaf-ae56-4021-8a85-2fa7c04ba4eb', 'serial': '26-8cc6-a1a7823a91bf', 'truesize': '32212254720', 'if': 'virtio'}], 'tdf': 'true', 'displayPort': '5915', 'spiceSecureChannels': 'smain,sinputs', 'nicModel': 'pv', 'keyboardLayout': 'en-us', 'kvmEnable': 'true', 'pitReinjection': 'false', 'clientIp': '', 'display': '15'}, {'bridge': 'PUB000_IL2_L111', 'acpiEnable': 'true', 'emulatedMachine': 'rhel5.5.0', 'tabletEnable': 'true', 'vmId': '1ef2c800-28d4-48fc-b955-9e6ea1a868fc', 'timeOffset': '32399', 'displaySecurePort': '5890', 'spiceSslCipherSuite': 'DEFAULT', 'cpuType': 'qemu64,+sse2,+cx16,+ssse3,+sse4.1,+sse4.2,+popcnt', 'ifid': '10', 'executable': '/usr/libexec/qemu-kvm -no-hpet', 'macAddr': '00:1a:4a:4e:3f:04', 'displayType': 'vnc', 'irqChip': 'true', 'boot': 'c', 'smp': '2', 'vmType': 'kvm', 'memSize': 2048, 'ifname': '10', 'smpCoresPerSocket': '2', 'vmName': 'LGEFLINX01V', 'spiceMonitors': '1', 'nice': '0', 'status': 'Up', 'pid': '31154', 'displayIp': '0', 'drives': [{'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '64424509440', 'format': 'raw', 'bus': '0', 'boot': 'true', 'volumeID': '74a65052-5346-42bd-a1c6-5befb81df17b', 'imageID': '3a7cccba-8f31-4bad-a2cc-03b4c5adc2ab', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/3a7cccba-8f31-4bad-a2cc-03b4c5adc2ab/74a65052-5346-42bd-a1c6-5befb81df17b', 'serial': 'ad-a2cc-03b4c5adc2ab', 'truesize': '64424509440', 'if': 'virtio'}, {'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '32212254720', 'format': 'raw', 'bus': '1', 'boot': 'false', 'volumeID': 'cb746870-3fde-40a9-998a-f006a9bd591d', 'imageID': '935394cf-83ba-4de5-a077-393f8bbb452a', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/935394cf-83ba-4de5-a077-393f8bbb452a/cb746870-3fde-40a9-998a-f006a9bd591d', 'serial': 'e5-a077-393f8bbb452a', 'truesize': '32212254720', 'if': 'virtio'}], 'tdf': 'true', 'displayPort': '5910', 'spiceSecureChannels': 'smain,sinputs', 'nicModel': 'pv', 'keyboardLayout': 'en-us', 'kvmEnable': 'true', 'pitReinjection': 'false', 'clientIp': '', 'display': '10'}, {'bridge': 'PUB000_IL2_L111', 'acpiEnable': 'true', 'emulatedMachine': 'rhel5.5.0', 'tabletEnable': 'true', 'vmId': '202e951a-c37c-4f62-9eee-794d8bdb0f33', 'timeOffset': '32396', 'displaySecurePort': '5888', 'spiceSslCipherSuite': 'DEFAULT', 'cpuType': 'qemu64,+sse2,+cx16,+ssse3,+sse4.1,+sse4.2,+popcnt', 'ifid': '12', 'executable': '/usr/libexec/qemu-kvm -no-hpet', 'macAddr': '00:1a:4a:4e:3f:06', 'displayType': 'vnc', 'irqChip': 'true', 'boot': 'c', 'smp': '2', 'vmType': 'kvm', 'memSize': 2048, 'ifname': '12', 'smpCoresPerSocket': '2', 'vmName': 'LGEDVDLX01V', 'spiceMonitors': '1', 'nice': '0', 'status': 'Up', 'pid': '27740', 'displayIp': '0', 'drives': [{'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '64424509440', 'format': 'raw', 'bus': '0', 'boot': 'true', 'volumeID': '42081e6e-9361-45f0-ad93-ed691bd05bcb', 'imageID': '988cece8-49b2-431b-9324-12d60eceb7bb', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/988cece8-49b2-431b-9324-12d60eceb7bb/42081e6e-9361-45f0-ad93-ed691bd05bcb', 'serial': '1b-9324-12d60eceb7bb', 'truesize': '64424509440', 'if': 'virtio'}, {'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '32212254720', 'format': 'raw', 'bus': '1', 'boot': 'false', 'volumeID': '99e812d1-c7e9-409c-b235-84773b5f77d6', 'imageID': 'b88e6a73-2dd4-48dd-91d8-f890d815dfae', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/b88e6a73-2dd4-48dd-91d8-f890d815dfae/99e812d1-c7e9-409c-b235-84773b5f77d6', 'serial': 'dd-91d8-f890d815dfae', 'truesize': '32212254720', 'if': 'virtio'}], 'tdf': 'true', 'displayPort': '5912', 'spiceSecureChannels': 'smain,sinputs', 'nicModel': 'pv', 'keyboardLayout': 'en-us', 'kvmEnable': 'true', 'pitReinjection': 'false', 'clientIp': '', 'display': '12'}, {'bridge': 'PUB000_IL2_L11B,NAS011_IL2_L103', 'acpiEnable': 'true', 'emulatedMachine': 'rhel5.5.0', 'tabletEnable': 'true', 'vmId': 'e83f49a2-50ec-45c4-84ba-23bfa37b041e', 'timeOffset': '32398', 'displaySecurePort': '5887', 'spiceSslCipherSuite': 'DEFAULT', 'cpuType': 'qemu64,+sse2,+cx16,+ssse3,+sse4.1,+sse4.2,+popcnt', 'ifid': '13', 'executable': '/usr/libexec/qemu-kvm -no-hpet', 'macAddr': '00:1a:4a:4e:3f:07,00:1a:4a:4e:3f:0a', 'displayType': 'vnc', 'irqChip': 'true', 'boot': 'c', 'smp': '2', 'vmType': 'kvm', 'memSize': 2048, 'ifname': '13', 'smpCoresPerSocket': '2', 'vmName': 'BKPLRH5601V', 'spiceMonitors': '1', 'nice': '0', 'status': 'Up', 'pid': '30835', 'displayIp': '0', 'drives': [{'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '2147483648', 'format': 'cow', 'bus': '0', 'boot': 'true', 'volumeID': '3486dffa-a7dd-4ca3-aa05-f1aad837da3a', 'imageID': '25189825-06dd-4dc0-9a5a-ee4bf2cc2d70', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/25189825-06dd-4dc0-9a5a-ee4bf2cc2d70/3486dffa-a7dd-4ca3-aa05-f1aad837da3a', 'serial': 'c0-9a5a-ee4bf2cc2d70', 'truesize': '2147483648', 'if': 'virtio'}], 'tdf': 'true', 'displayPort': '5913', 'spiceSecureChannels': 'smain,sinputs', 'nicModel': 'pv,pv', 'keyboardLayout': 'en-us', 'kvmEnable': 'true', 'pitReinjection': 'false', 'clientIp': '', 'display': '13'}, {'bridge': 'PUB000_IL2_L111', 'acpiEnable': 'true', 'emulatedMachine': 'rhel5.5.0', 'tabletEnable': 'true', 'vmId': 'd0332751-99f7-4876-b56a-eae757f99498', 'timeOffset': '32398', 'displaySecurePort': '5889', 'spiceSslCipherSuite': 'DEFAULT', 'cpuType': 'qemu64,+sse2,+cx16,+ssse3,+sse4.1,+sse4.2,+popcnt', 'ifid': '11', 'executable': '/usr/libexec/qemu-kvm -no-hpet', 'macAddr': '00:1a:4a:4e:3f:05', 'displayType': 'vnc', 'irqChip': 'true', 'boot': 'c', 'smp': '2', 'vmType': 'kvm', 'memSize': 2048, 'ifname': '11', 'smpCoresPerSocket': '2', 'vmName': 'VHOAHOLX01V', 'spiceMonitors': '1', 'nice': '0', 'status': 'Up', 'pid': '31823', 'displayIp': '0', 'drives': [{'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '64424509440', 'format': 'raw', 'bus': '0', 'boot': 'true', 'volumeID': '574ecc2e-4843-40b9-b6b4-77af577b3030', 'imageID': '5688a71f-bc60-40e5-8954-95b1875249c7', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/5688a71f-bc60-40e5-8954-95b1875249c7/574ecc2e-4843-40b9-b6b4-77af577b3030', 'serial': 'e5-8954-95b1875249c7', 'truesize': '64424509440', 'if': 'virtio'}, {'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '32212254720', 'format': 'raw', 'bus': '1', 'boot': 'false', 'volumeID': '1ae961cd-0609-4953-8a75-a9e5321fcc60', 'imageID': '7a4bc0b2-158f-48ca-af68-8eec1b70b35f', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/7a4bc0b2-158f-48ca-af68-8eec1b70b35f/1ae961cd-0609-4953-8a75-a9e5321fcc60', 'serial': 'ca-af68-8eec1b70b35f', 'truesize': '32212254720', 'if': 'virtio'}], 'tdf': 'true', 'displayPort': '5911', 'spiceSecureChannels': 'smain,sinputs', 'nicModel': 'pv', 'keyboardLayout': 'en-us', 'kvmEnable': 'true', 'pitReinjection': 'false', 'clientIp': '', 'display': '11'}, {'bridge': 'rhevm', 'acpiEnable': 'true', 'emulatedMachine': 'rhel5.5.0', 'tabletEnable': 'true', 'vmId': '47344c60-9fec-440f-af60-21ac75fd5e71', 'cdrom': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/53583404-562e-46fb-a236-0eca8dc63c2d/images/11111111-1111-1111-1111-111111111111/CentOS-5.4-x86_64-bin-DVD.iso', 'displaySecurePort': '5884', 'spiceSslCipherSuite': 'DEFAULT', 'cpuType': 'qemu64,+sse2,+cx16,+ssse3,+sse4.1,+sse4.2,+popcnt', 'ifid': '16', 'executable': '/usr/libexec/qemu-kvm -no-hpet', 'macAddr': '00:1a:4a:4e:3f:01', 'displayType': 'vnc', 'irqChip': 'true', 'boot': 'dc', 'smp': '2', 'vmType': 'kvm', 'memSize': 2048, 'ifname': '16', 'smpCoresPerSocket': '2', 'vmName': '50CENT', 'spiceMonitors': '1', 'nice': '0', 'status': 'Up', 'pid': '20972', 'displayIp': '0', 'drives': [{'domainID': '35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c', 'apparentsize': '32212254720', 'format': 'raw', 'bus': '0', 'boot': 'true', 'volumeID': 'b72a5f1e-7b76-445b-8e76-299228345309', 'imageID': '456ce3db-16db-46fb-b3c2-1d380b740655', 'blockDev': True, 'propagateErrors': 'off', 'poolID': '53dc31cd-cf22-437c-8ccf-ab48869bf3e7', 'path': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/35ae5aad-5e88-4e7c-8f5e-51ab76f56a9c/images/456ce3db-16db-46fb-b3c2-1d380b740655/b72a5f1e-7b76-445b-8e76-299228345309', 'serial': 'fb-b3c2-1d380b740655', 'truesize': '32212254720', 'if': 'virtio'}], 'tdf': 'true', 'displayPort': '5916', 'spiceSecureChannels': 'smain,sinputs', 'nicModel': 'pv', 'keyboardLayout': 'en-us', 'kvmEnable': 'true', 'timeOffset': '+160', 'clientIp': '', 'display': '16'}]}
+    rsp = {'dd1090a5-64ac-45b8-b1d2-9f8248393525':{'status': {'message': 'Done', 'code': 0}, 'statsList': [{'username': 'Unknown', 'memUsage': '0', 'acpiEnable': 'true', 'pid': '18996',  'rxRate': '0.00', 'lastLogout': 1304647887.0542941, 'session': 'Unknown', 'displaySecurePort': '5886', 'timeOffset': '+32400', 'network': {'virtio_14_1': {'macAddr': '00:1a:4a:4e:3f:08', 'name': 'virtio_14_1', 'txDropped': '1', 'rxErrors': '0', 'txRate': '3.6597931745e-05', 'rxRate': '0.0', 'txErrors': '0', 'state': 'up', 'speed': '1000', 'rxDropped': '0'}, 'virtio_14_2': {'macAddr': '00:1a:4a:4e:3f:0b', 'name': 'virtio_14_2', 'txDropped': '1', 'rxErrors': '0', 'txRate': '3.6597931745e-05', 'rxRate': '0.0', 'txErrors': '0', 'state': 'up', 'speed': '1000', 'rxDropped': '0'}}, 'displayType': 'vnc', 'cpuUser': '1.11', 'boot': 'c', 'elapsedTime': '4681370', 'vmType': 'kvm', 'cpuSys': '0.86', 'appsList': [], 'nice': '0', 'status': 'Up', 'txDropped': '0.25', 'txRate': '0.00', 'displayIp': '0', 'displayPort': '5914', 'lastUser': 'Unknown', 'guestIPs': '',                'kvmEnable': 'True',                'rxDropped': '0.00', 'vmId': 'dd1090a5-64ac-45b8-b1VM_INFO-9f8248393525', 'disks': {'virtio0': {'readRate': '0.00', 'truesize': '2147483648', 'apparentsize': '2147483648', 'writeRate': '0.00', 'imageID': '59c4900b-8edf-4eb8-bf3c-f09a6f284b95'}, 'sd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'floppy0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'ide1-cd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}}, 'monitorResponse': '0', 'cpuIdle': '100.00', 'clientIp': '', 'display': '14'}]}, '2864b28b-dbbc-4e5d-918a-fab4fea46fb4':{'status': {'message': 'Done', 'code': 0}, 'statsList': [{'status': 'Up', 'memUsage': '0', 'acpiEnable': 'true', 'pid': '20172', 'rxRate': '0.00', 'session': 'Unknown', 'displaySecurePort': '5885', 'timeOffset': '32397', 'network': {'virtio_15_1': {'macAddr': '00:1a:4a:4e:3f:09', 'name': 'virtio_15_1', 'txDropped': '1', 'rxErrors': '0', 'txRate': '0.0', 'rxRate': '0.0', 'txErrors': '0', 'state': 'up', 'speed': '1000', 'rxDropped': '0'}}, 'txDropped': '0.12', 'cpuUser': '0.87', 'boot': 'c', 'elapsedTime': '7774800', 'vmType': 'kvm', 'cpuSys': '0.87', 'appsList': [], 'displayType': 'vnc', 'nice': '0', 'username': 'Unknown', 'txRate': '0.00', 'displayIp': '0', 'displayPort': '5915', 'guestIPs': '', 'kvmEnable': 'True', 'rxDropped': '0.00', 'vmId': '2864b28b-dbbc-4e5d-918a-fab4fea46fb4', 'disks': {'virtio0': {'readRate': '0.00', 'truesize': '64424509440', 'apparentsize': '64424509440', 'writeRate': '0.00', 'imageID': '50b25386-3503-4ffc-bb07-29b334916ec1'}, 'virtio1': {'readRate': '0.00', 'truesize': '32212254720', 'apparentsize': '32212254720', 'writeRate': '0.00', 'imageID': '18222642-1882-4126-8cc6-a1a7823a91bf'}, 'sd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'floppy0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'ide1-cd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}}, 'monitorResponse': '0', 'cpuIdle': '100.00', 'clientIp': '', 'display': '15'}]}, '1ef2c800-28d4-48fc-b955-9e6ea1a868fc':{'status': {'message': 'Done', 'code': 0}, 'statsList': [{'status': 'Up', 'memUsage': '0', 'acpiEnable': 'true', 'pid': '31154', 'rxRate': '0.00', 'session': 'Unknown', 'displaySecurePort': '5890', 'timeOffset': '32399', 'network': {'virtio_10_1': {'macAddr': '00:1a:4a:4e:3f:04', 'name': 'virtio_10_1', 'txDropped': '1', 'rxErrors': '0', 'txRate': '2.47608719208e-05', 'rxRate': '0.0', 'txErrors': '0', 'state': 'up', 'speed': '1000', 'rxDropped': '0'}}, 'txDropped': '0.12', 'cpuUser': '0.87', 'boot': 'c', 'elapsedTime': '8977210', 'vmType': 'kvm', 'cpuSys': '2.37', 'appsList': [], 'displayType': 'vnc', 'nice': '0', 'username': 'Unknown', 'txRate': '0.00', 'displayIp': '0', 'displayPort': '5910', 'guestIPs': '', 'kvmEnable': 'True', 'rxDropped': '0.00', 'vmId': '1ef2c800-28d4-48fc-b955-9e6ea1a868fc', 'disks': {'virtio0': {'readRate': '0.00', 'truesize': '64424509440', 'apparentsize': '64424509440', 'writeRate': '2044.77', 'imageID': '3a7cccba-8f31-4bad-a2cc-03b4c5adc2ab'}, 'virtio1': {'readRate': '0.00', 'truesize': '32212254720', 'apparentsize': '32212254720', 'writeRate': '0.00', 'imageID': '935394cf-83ba-4de5-a077-393f8bbb452a'}, 'sd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'floppy0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'ide1-cd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}}, 'monitorResponse': '0', 'cpuIdle': '100.00', 'clientIp': '', 'display': '10'}]}, '202e951a-c37c-4f62-9eee-794d8bdb0f33':{'status': {'message': 'Done', 'code': 0}, 'statsList': [{'status': 'Up', 'memUsage': '0', 'acpiEnable': 'true', 'pid': '27740', 'rxRate': '0.00', 'session': 'Unknown', 'displaySecurePort': '5888', 'timeOffset': '32396', 'network': {'virtio_12_1': {'macAddr': '00:1a:4a:4e:3f:06', 'name': 'virtio_12_1', 'txDropped': '1', 'rxErrors': '0', 'txRate': '0.0', 'rxRate': '0.0', 'txErrors': '0', 'state': 'up', 'speed': '1000', 'rxDropped': '0'}}, 'txDropped': '0.12', 'cpuUser': '0.37', 'boot': 'c', 'elapsedTime': '8915794', 'vmType': 'kvm', 'cpuSys': '0.87', 'appsList': [], 'displayType': 'vnc', 'nice': '0', 'username': 'Unknown', 'txRate': '0.00', 'displayIp': '0', 'displayPort': '5912', 'guestIPs': '', 'kvmEnable': 'True', 'rxDropped': '0.00', 'vmId': '202e951a-c37c-4f62-9eee-794d8bdb0f33', 'disks': {'virtio0': {'readRate': '0.00', 'truesize': '64424509440', 'apparentsize': '64424509440', 'writeRate': '0.00', 'imageID': '988cece8-49b2-431b-9324-12d60eceb7bb'}, 'virtio1': {'readRate': '0.00', 'truesize': '32212254720', 'apparentsize': '32212254720', 'writeRate': '0.00', 'imageID': 'b88e6a73-2dd4-48dd-91d8-f890d815dfae'}, 'sd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'floppy0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'ide1-cd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}}, 'monitorResponse': '0', 'cpuIdle': '100.00', 'clientIp': '', 'display': '12'}]}, 'e83f49a2-50ec-45c4-84ba-23bfa37b041e':{'status': {'message': 'Done', 'code': 0}, 'statsList': [{'status': 'Up', 'memUsage': '0', 'acpiEnable': 'true', 'pid': '30835', 'rxRate': '0.00', 'session': 'Unknown', 'displaySecurePort': '5887', 'timeOffset': '32398', 'network': {'virtio_13_2': {'macAddr': '00:1a:4a:4e:3f:0a', 'name': 'virtio_13_2', 'txDropped': '1', 'rxErrors': '0', 'txRate': '2.47516414595e-05', 'rxRate': '0.0', 'txErrors': '0', 'state': 'up', 'speed': '1000', 'rxDropped': '0'}, 'virtio_13_1': {'macAddr': '00:1a:4a:4e:3f:07', 'name': 'virtio_13_1', 'txDropped': '1', 'rxErrors': '0', 'txRate': '3.71274621892e-05', 'rxRate': '0.0', 'txErrors': '0', 'state': 'up', 'speed': '1000', 'rxDropped': '0'}}, 'txDropped': '0.25', 'cpuUser': '0.75', 'boot': 'c', 'elapsedTime': '93652', 'vmType': 'kvm', 'cpuSys': '0.75', 'appsList': [], 'displayType': 'vnc', 'nice': '0', 'username': 'Unknown', 'txRate': '0.00', 'displayIp': '0', 'displayPort': '5913', 'guestIPs': '', 'kvmEnable': 'True', 'rxDropped': '0.00', 'vmId': 'e83f49a2-50ec-45c4-84ba-23bfa37b041e', 'disks': {'virtio0': {'readRate': '0.00', 'truesize': '2147483648', 'apparentsize': '2147483648', 'writeRate': '2044.01', 'imageID': '25189825-06dd-4dc0-9a5a-ee4bf2cc2d70'}, 'sd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'floppy0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'ide1-cd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}}, 'monitorResponse': '0', 'cpuIdle': '100.00', 'clientIp': '', 'display': '13'}]}, 'd0332751-99f7-4876-b56a-eae757f99498':{'status': {'message': 'Done', 'code': 0}, 'statsList': [{'status': 'Up', 'memUsage': '0', 'acpiEnable': 'true', 'pid': '31823', 'rxRate': '0.00', 'session': 'Unknown', 'displaySecurePort': '5889', 'timeOffset': '32398', 'network': {'virtio_11_1': {'macAddr': '00:1a:4a:4e:3f:05', 'name': 'virtio_11_1', 'txDropped': '1', 'rxErrors': '0', 'txRate': '2.476406106e-05', 'rxRate': '0.0', 'txErrors': '0', 'state': 'up', 'speed': '1000', 'rxDropped': '0'}}, 'txDropped': '0.12', 'cpuUser': '0.87', 'boot': 'c', 'elapsedTime': '8970759', 'vmType': 'kvm', 'cpuSys': '4.24', 'appsList': [], 'displayType': 'vnc', 'nice': '0', 'username': 'Unknown', 'txRate': '0.00', 'displayIp': '0', 'displayPort': '5911', 'guestIPs': '', 'kvmEnable': 'True', 'rxDropped': '0.00', 'vmId': 'd0332751-99f7-4876-b56a-eae757f99498', 'disks': {'virtio0': {'readRate': '0.00', 'truesize': '64424509440', 'apparentsize': '64424509440', 'writeRate': '2045.03', 'imageID': '5688a71f-bc60-40e5-8954-95b1875249c7'}, 'virtio1': {'readRate': '0.00', 'truesize': '32212254720', 'apparentsize': '32212254720', 'writeRate': '0.00', 'imageID': '7a4bc0b2-158f-48ca-af68-8eec1b70b35f'}, 'sd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'floppy0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'ide1-cd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}}, 'monitorResponse': '0', 'cpuIdle': '100.00', 'clientIp': '', 'display': '11'}]}, '47344c60-9fec-440f-af60-21ac75fd5e71':{'status': {'message': 'Done', 'code': 0}, 'statsList': [{'username': 'Unknown', 'memUsage': '0', 'acpiEnable': 'true', 'pid': '20972', 'rxRate': '0.00', 'cdrom': '/rhev/data-center/53dc31cd-cf22-437c-8ccf-ab48869bf3e7/53583404-562e-46fb-a236-0eca8dc63c2d/images/11111111-1111-1111-1111-111111111111/CentOS-5.4-x86_64-bin-DVD.iso', 'session': 'Unknown', 'displayPort': '5916', 'displaySecurePort': '5884', 'timeOffset': '+160', 'network': {'virtio_16_1': {'macAddr': '00:1a:4a:4e:3f:01', 'name': 'virtio_16_1', 'txDropped': '1', 'rxErrors': '0', 'txRate': '4.19599538576e-05', 'rxRate': '0.0', 'txErrors': '0', 'state': 'up', 'speed': '1000', 'rxDropped': '0'}}, 'displayType': 'vnc', 'cpuUser': '1.12', 'boot': 'dc', 'elapsedTime': '3942904', 'vmType': 'kvm', 'cpuSys': '1.50', 'appsList': [], 'nice': '0', 'status': 'Up', 'txDropped': '0.12', 'displayIp': '0', 'txRate': '0.00', 'lastLogout': 1305386354.0247359, 'lastUser': 'Unknown', 'guestIPs': '', 'kvmEnable': 'True', 'rxDropped': '0.00', 'vmId': '47344c60-9fec-440f-af60-21ac75fd5e71', 'disks': {'virtio0': {'readRate': '0.00', 'truesize': '32212254720', 'apparentsize': '32212254720', 'writeRate': '0.00', 'imageID': '456ce3db-16db-46fb-b3c2-1d380b740655'}, 'sd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'floppy0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}, 'ide1-cd0': {'readRate': '0.00', 'truesize': '', 'apparentsize': '', 'writeRate': '0.00', 'imageID': ''}}, 'monitorResponse': '0', 'cpuIdle': '100.00', 'clientIp': '', 'display': '16'}]}}
+    if response['status']['code'] != 0:
+        if DEBUG_PRINT == 1 :
+            print response['status']['message']
+    else:
+        #    for d1 in response['vmList']:
+        #        print d1
+        STR_SPLIT1 = chr(0x03) + chr(0x1F) + chr(0x7C)
+        STR_SPLIT2 = chr(0x03) + chr(0x1F) + chr(0x7E)
+        VM_HEAD = "INDEX%sVM_NAME%sEM_MACHINE%sVMID%sCORES_P_SOCKET%sALLOC_MEM%sMAC%sBRIDGE%sBOOT_STATUS%sBOOT_TIME%sCPU_USED%sCPU_IDLE%sCPU_SYS%sCPU_USER%sMEM_USED%sMEM_USE%sRX_RATE%sTX_RATE%sRX_DROP%sTX_DROP%sNWT_CNT%sDSK_SIZE%sDSK_R_RATE%sDSK_W_RATE%sDSK_CNT%sDRV_SIZE%sDRV_CNT%s" % (STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2)
+        VDISK_HEAD = "INDEX%sVMID%sDISK_NAME%sIMAGE_ID%sTRUE_SIZE%sAPP_SIZE%sREAD_RATE%sWRITE_RATE%s" % (STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2)
+        VNWT_HEAD = "INDEX%sVMID%sMAC%sNWT_NAME%sSPEED%sRX_RATE%sTX_RATE%sRX_ERR%sTX_ERR%sRX_DROP%sTX_DROP%sNWT_STATE%s" % (STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2)
+        VDRV_HEAD = "INDEX%sVMID%sVOL_ID%sDOMAIN_ID%sIMAGE_ID%sPOOL_ID%sDRV_PATH%sSERIAL%sBLK_DEV%sTRUE_SIZE%sPROPAGATE_ERR%sBOOT_STATUS%s" % (STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2, STR_SPLIT2)
+        #print "====================<<response>>========================="
+        #print response
+        #print "====================<<response['vmList']['vmId']>>========================="
+        
+        VM_INDEX = 0
+        VM_NWT_CNT = 0
+        VM_DSK_SIZE = 0.0
+        VM_DSK_AVG_R_RATE = 0.0
+        VM_DSK_AVG_W_RATE = 0.0
+        VM_DSK_R_RATE = 0.0
+        VM_DSK_W_RATE = 0.0
+        VM_DSK_CNT = 0
+        VM_DRV_SIZE = 0.0
+        VM_DRV_CNT = 0
+        VDISK_INDEX = 0
+        VNWT_INDEX = 0
+        VDRV_INDEX = 0
+        
+        VM_DATA = VM_HEAD
+        VDISK_DATA = VDISK_HEAD
+        VNWT_DATA = VNWT_HEAD
+        VDRV_DATA = VDRV_HEAD
+        
+        for VM_INFO in response['vmList']:
+            #print "====================<<server.getVmStats>>========================="
+            #VM_STATE = server.getVmStats(VM_INFO['vmId'])
+            VM_INDEX = VM_INDEX + 1
+            VM_STATE = rsp[VM_INFO['vmId']]['statsList'][0]
+
+            #print "[%s]:[%s]:%s" % (VM_INFO['vmId'],VM_INFO['vmName'], VM_STATE)
+            CPU_USED = string.atof(VM_STATE['cpuUser']) + string.atof(VM_STATE['cpuSys'])
+            CPU_IDLE = 100.0 - CPU_USED
+            MEM_USE = int(string.atof(VM_STATE['memUsage']) / 100 * float(VM_INFO['memSize']))
+            
+            VM_BOOT_STATE = 1
+            if VM_INFO['status'] != '' :
+                if string.upper(VM_INFO['status']) == 'UP' :
+                    VM_BOOT_STATE = 1
+                else:
+                    VM_BOOT_STATE = 0
+
+            TIME_TMP = int(time.time()) - string.atoi(VM_INFO['timeOffset'])
+
+            if DEBUG_PRINT == 1 :
+                print time.localtime(TIME_TMP)
+                print time.localtime(time.time())
+            
+            VM_NWT_CNT = 0
+            VM_DSK_SIZE = 0.0
+            VM_DSK_AVG_R_RATE = 0.0
+            VM_DSK_AVG_W_RATE = 0.0
+            VM_DSK_R_RATE = 0.0
+            VM_DSK_W_RATE = 0.0
+            VM_DSK_CNT = 0
+            VM_DRV_SIZE = 0.0
+            VM_DRV_CNT = 0
+
+            for VDISK_NAME in VM_STATE['disks'].keys():
+                #print "VMID=%s, VDISK=NAME=%s" % (VM_INFO['vmId'], VDISK_NAME)
+                if VM_STATE['disks'][VDISK_NAME]['truesize'] != '' :
+                    VDISK_INDEX = VDISK_INDEX + 1
+                    
+                    VM_DSK_CNT = VM_DSK_CNT + 1
+                    VM_DSK_SIZE = VM_DSK_SIZE + string.atof(VM_STATE['disks'][VDISK_NAME]['truesize'])/1024.0/1024.0
+                    VM_DSK_R_RATE = VM_DSK_R_RATE + string.atof(VM_STATE['disks'][VDISK_NAME]['readRate'])
+                    VM_DSK_W_RATE = VM_DSK_W_RATE + string.atof(VM_STATE['disks'][VDISK_NAME]['writeRate'])
+
+                    if DEBUG_PRINT == 1 :
+                        print "VDISK=%s%d%s%s%s%s%s%s%s%d%s%d%s%0.2f%s%0.2f%s" % (STR_SPLIT1, VDISK_INDEX, STR_SPLIT2, VM_INFO['vmId'], STR_SPLIT2, VDISK_NAME, STR_SPLIT2, VM_STATE['disks'][VDISK_NAME]['imageID'], STR_SPLIT2, string.atoi(VM_STATE['disks'][VDISK_NAME]['truesize'])/1024/1024, STR_SPLIT2, string.atoi(VM_STATE['disks'][VDISK_NAME]['apparentsize'])/1024/1024, STR_SPLIT2, string.atof(VM_STATE['disks'][VDISK_NAME]['readRate']), STR_SPLIT2, string.atof(VM_STATE['disks'][VDISK_NAME]['writeRate']), STR_SPLIT2)
+                    VDISK_DATA = VDISK_DATA + "%s%d%s%s%s%s%s%s%s%d%s%d%s%0.2f%s%0.2f%s" % (STR_SPLIT1, VDISK_INDEX, STR_SPLIT2, VM_INFO['vmId'], STR_SPLIT2, VDISK_NAME, STR_SPLIT2, VM_STATE['disks'][VDISK_NAME]['imageID'], STR_SPLIT2, string.atoi(VM_STATE['disks'][VDISK_NAME]['truesize'])/1024/1024, STR_SPLIT2, string.atoi(VM_STATE['disks'][VDISK_NAME]['apparentsize'])/1024/1024, STR_SPLIT2, string.atof(VM_STATE['disks'][VDISK_NAME]['readRate']), STR_SPLIT2, string.atof(VM_STATE['disks'][VDISK_NAME]['writeRate']), STR_SPLIT2)
+            VM_DSK_AVG_R_RATE = VM_DSK_R_RATE / float(VM_DSK_CNT)
+            VM_DSK_AVG_W_RATE = VM_DSK_W_RATE / float(VM_DSK_CNT)
+ 
+            for VNWT_NAME in VM_STATE['network'].keys():
+                VNWT_INDEX = VNWT_INDEX + 1
+                if VM_STATE['network'][VNWT_NAME]['macAddr'] != '' :
+                    VNWT_MAC = VM_STATE['network'][VNWT_NAME]['macAddr']
+                else:
+                    VNWT_MAC = "-"
+
+                if VM_STATE['network'][VNWT_NAME]['rxDropped'] != '' :
+                    VNWT_RXDROP = string.atof(VM_STATE['network'][VNWT_NAME]['rxDropped'])
+                else:
+                    VNWT_RXDROP = 0.0
+
+                if VM_STATE['network'][VNWT_NAME]['txDropped'] != '' :
+                    VNWT_TXDROP = string.atof(VM_STATE['network'][VNWT_NAME]['txDropped'])
+                else:
+                    VNWT_TXDROP = 0.0
+
+                if VM_STATE['network'][VNWT_NAME]['rxErrors'] != '' :
+                    VNWT_RXERR = string.atof(VM_STATE['network'][VNWT_NAME]['rxErrors'])
+                else:
+                    VNWT_RXERR = 0.0
+
+                if VM_STATE['network'][VNWT_NAME]['txErrors'] != '' :
+                    VNWT_TXERR = string.atof(VM_STATE['network'][VNWT_NAME]['txErrors'])
+                else:
+                    VNWT_TXERR = 0.0
+
+                if VM_STATE['network'][VNWT_NAME]['rxRate'] != '' :
+                    VNWT_RXRATE = string.atof(VM_STATE['network'][VNWT_NAME]['rxRate'])
+                else:
+                    VNWT_RXRATE = 0.0
+
+                if VM_STATE['network'][VNWT_NAME]['txRate'] != '' :
+                    VNWT_TXRATE = string.atof(VM_STATE['network'][VNWT_NAME]['txRate'])
+                else:
+                    VNWT_TXRATE = 0.0
+                
+                if VM_STATE['network'][VNWT_NAME]['state'] != '' :
+                    if string.upper(VM_STATE['network'][VNWT_NAME]['state']) == 'UP' :
+                        VNWT_STATE = 1
+                    else:
+                        VNWT_STATE = 0
+                else:
+                    VNWT_STATE = 1
+                    
+                VM_NWT_CNT = VM_NWT_CNT + 1
+
+                if DEBUG_PRINT == 1 :
+                    print "VNWT=%s%d%s%s%s%s%s%s%s%d%s%0.2f%s%0.2f%s%0.2f%s%0.2f%s%0.2f%s%0.2f%s%d%s" % (STR_SPLIT1, VNWT_INDEX, STR_SPLIT2, VM_INFO['vmId'], STR_SPLIT2, string.upper(VNWT_MAC), STR_SPLIT2, VNWT_NAME, STR_SPLIT2, string.atoi(VM_STATE['network'][VNWT_NAME]['speed']), STR_SPLIT2, VNWT_RXRATE, STR_SPLIT2, VNWT_TXRATE, STR_SPLIT2, VNWT_RXERR, STR_SPLIT2, VNWT_TXERR, STR_SPLIT2, VNWT_RXDROP, STR_SPLIT2, VNWT_TXDROP, STR_SPLIT2, VNWT_STATE, STR_SPLIT2)
+                VNWT_DATA = VNWT_DATA + "%s%d%s%s%s%s%s%s%s%d%s%0.2f%s%0.2f%s%0.2f%s%0.2f%s%0.2f%s%0.2f%s%d%s" % (STR_SPLIT1, VNWT_INDEX, STR_SPLIT2, VM_INFO['vmId'], STR_SPLIT2, string.upper(VNWT_MAC), STR_SPLIT2, VNWT_NAME, STR_SPLIT2, string.atoi(VM_STATE['network'][VNWT_NAME]['speed']), STR_SPLIT2, VNWT_RXRATE, STR_SPLIT2, VNWT_TXRATE, STR_SPLIT2, VNWT_RXERR, STR_SPLIT2, VNWT_TXERR, STR_SPLIT2, VNWT_RXDROP, STR_SPLIT2, VNWT_TXDROP, STR_SPLIT2, VNWT_STATE, STR_SPLIT2)
+
+            for VDRV_INFO in VM_INFO['drives']:
+                VDRV_INDEX = VDRV_INDEX + 1
+
+                if VDRV_INFO['blockDev'] != '' :
+                    if VDRV_INFO['blockDev'] == True :
+                        VDRV_BLOCK_DEV = 1
+                    else:
+                        VDRV_BLOCK_DEV = 0
+                else:
+                    VDRV_BLOCK_DEV = 0
+                    
+                if VDRV_INFO['propagateErrors'] != '' :
+                    if string.upper(VDRV_INFO['propagateErrors']) == 'OFF' :
+                        VDRV_PROPAGATE = 0
+                    else:
+                        VDRV_PROPAGATE = 1
+                else:
+                    VDRV_PROPAGATE = 0
+                    
+                if VDRV_INFO['boot'] != '' :
+                    if string.upper(VDRV_INFO['boot']) == 'UP' :
+                        VDRV_STATE = 1
+                    else:
+                        VDRV_STATE = 0
+                else:
+                    VDRV_STATE = 1
+                    
+                VM_DRV_SIZE = VM_DRV_SIZE + string.atof(VDRV_INFO['truesize'])/1024.0/1024.0
+                VM_DRV_CNT = VM_DRV_CNT + 1
+
+                if DEBUG_PRINT == 1 :
+                    print "VDRV=%s%d%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d%s%d%s%d%s%d%s" % (STR_SPLIT1, VDRV_INDEX, STR_SPLIT2, VM_INFO['vmId'], STR_SPLIT2, VDRV_INFO['volumeID'], STR_SPLIT2, VDRV_INFO['domainID'], STR_SPLIT2, VDRV_INFO['imageID'], STR_SPLIT2, VDRV_INFO['poolID'], STR_SPLIT2, VDRV_INFO['path'], STR_SPLIT2, VDRV_INFO['serial'], STR_SPLIT2, VDRV_BLOCK_DEV, STR_SPLIT2, string.atoi(VDRV_INFO['truesize'])/1024/1024, STR_SPLIT2, VDRV_PROPAGATE, STR_SPLIT2, VDRV_STATE, STR_SPLIT2)
+                VDRV_DATA = VDRV_DATA + "%s%d%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d%s%d%s%d%s%d%s" % (STR_SPLIT1, VDRV_INDEX, STR_SPLIT2, VM_INFO['vmId'], STR_SPLIT2, VDRV_INFO['volumeID'], STR_SPLIT2, VDRV_INFO['domainID'], STR_SPLIT2, VDRV_INFO['imageID'], STR_SPLIT2, VDRV_INFO['poolID'], STR_SPLIT2, VDRV_INFO['path'], STR_SPLIT2, VDRV_INFO['serial'], STR_SPLIT2, VDRV_BLOCK_DEV, STR_SPLIT2, string.atoi(VDRV_INFO['truesize'])/1024/1024, STR_SPLIT2, VDRV_PROPAGATE, STR_SPLIT2, VDRV_STATE, STR_SPLIT2)
+                
+            if DEBUG_PRINT == 1 :
+                print "VM=%s%d%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d%s%d%s%0.2f%s%0.2f%s%0.2f%s%0.2f%s%0.2f%s%d%s%s%s%s%s%s%s%s%s%d%s%0.2f%s%0.2f%s%0.2f%s%d%s%0.2f%s%d%s" % (STR_SPLIT1, VM_INDEX, STR_SPLIT2, VM_INFO['vmName'], STR_SPLIT2, VM_INFO['emulatedMachine'], STR_SPLIT2, VM_INFO['vmId'], STR_SPLIT2, VM_INFO['smpCoresPerSocket'], STR_SPLIT2, VM_INFO['memSize'], STR_SPLIT2, string.upper(VM_INFO['macAddr']), STR_SPLIT2, VM_INFO['bridge'], STR_SPLIT2, VM_BOOT_STATE, STR_SPLIT2, TIME_TMP, STR_SPLIT2, CPU_USED, STR_SPLIT2, CPU_IDLE, STR_SPLIT2, string.atof(VM_STATE['cpuSys']), STR_SPLIT2, string.atof(VM_STATE['cpuUser']), STR_SPLIT2, string.atof(VM_STATE['memUsage']), STR_SPLIT2, MEM_USE, STR_SPLIT2, string.atof(VM_STATE['rxRate']), STR_SPLIT2, string.atof(VM_STATE['txRate']), STR_SPLIT2, string.atof(VM_STATE['rxDropped']), STR_SPLIT2, string.atof(VM_STATE['txDropped']), STR_SPLIT2, VM_NWT_CNT, STR_SPLIT2, VM_DSK_SIZE, STR_SPLIT2, VM_DSK_AVG_R_RATE, STR_SPLIT2, VM_DSK_AVG_W_RATE, STR_SPLIT2, VM_DSK_CNT, STR_SPLIT2, VM_DRV_SIZE, STR_SPLIT2, VM_DRV_CNT, STR_SPLIT2)
+            VM_DATA = VM_DATA + "%s%d%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%d%s%d%s%0.2f%s%0.2f%s%0.2f%s%0.2f%s%0.2f%s%d%s%s%s%s%s%s%s%s%s%d%s%0.2f%s%0.2f%s%0.2f%s%d%s%0.2f%s%d%s" % (STR_SPLIT1, VM_INDEX, STR_SPLIT2, VM_INFO['vmName'], STR_SPLIT2, VM_INFO['emulatedMachine'], STR_SPLIT2, VM_INFO['vmId'], STR_SPLIT2, VM_INFO['smpCoresPerSocket'], STR_SPLIT2, VM_INFO['memSize'], STR_SPLIT2, string.upper(VM_INFO['macAddr']), STR_SPLIT2, VM_INFO['bridge'], STR_SPLIT2, VM_BOOT_STATE, STR_SPLIT2, TIME_TMP, STR_SPLIT2, CPU_USED, STR_SPLIT2, CPU_IDLE, STR_SPLIT2, string.atof(VM_STATE['cpuSys']), STR_SPLIT2, string.atof(VM_STATE['cpuUser']), STR_SPLIT2, string.atof(VM_STATE['memUsage']), STR_SPLIT2, MEM_USE, STR_SPLIT2, string.atof(VM_STATE['rxRate']), STR_SPLIT2, string.atof(VM_STATE['txRate']), STR_SPLIT2, string.atof(VM_STATE['rxDropped']), STR_SPLIT2, string.atof(VM_STATE['txDropped']), STR_SPLIT2, VM_NWT_CNT, STR_SPLIT2, VM_DSK_SIZE, STR_SPLIT2, VM_DSK_AVG_R_RATE, STR_SPLIT2, VM_DSK_AVG_W_RATE, STR_SPLIT2, VM_DSK_CNT, STR_SPLIT2, VM_DRV_SIZE, STR_SPLIT2, VM_DRV_CNT, STR_SPLIT2)
+
+    while 1 :
+        if DEBUG_PRINT == 1 : 
+            print VM_DATA
+            print VDISK_DATA
+            print VNWT_DATA
+            print VDRV_DATA
+    
+        data_file = open("../aproc/shell/vm.dat", 'w')
+        data_file.write(VM_DATA)
+        data_file.close()
+
+        data_file = open("../aproc/shell/vdisk.dat", 'w')
+        data_file.write(VDISK_DATA)
+        data_file.close()
+    
+        data_file = open("../aproc/shell/vnwt.dat", 'w')
+        data_file.write(VNWT_DATA)
+        data_file.close()    
+
+        data_file = open("../aproc/shell/vdrv.dat", 'w')
+        data_file.write(VDRV_DATA)
+        data_file.close()
+
+        time.sleep(10)

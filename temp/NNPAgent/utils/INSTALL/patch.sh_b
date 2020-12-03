@@ -1,0 +1,102 @@
+CUR_PATH=`pwd`
+cd ../..
+NNP_PATH=`pwd`
+cd ..
+DCA_PATH=`pwd`
+cd $CUR_PATH
+
+UNIX95=1
+export UNIX95
+
+for CMD_SCD_PID in `ps -e -o pid -o args | grep -v grep | grep cmd_scd | grep "/4/" | awk -F' ' '{print $1}'`
+do
+    pid=`echo $CMD_SCD_PID | cut -d' ' -f1`
+    if [ $pid ] ; then
+        kill -9 $pid
+    fi
+done
+
+for CMD_SCD_PID in `ps -e -o pid -o args | grep -v grep | grep cmd_scd | grep "/2/" | awk -F' ' '{print $1}'`
+do
+    pid=`echo $CMD_SCD_PID | cut -d' ' -f1`
+    if [ $pid ] ; then
+        kill -9 $pid
+    fi
+done
+
+touch ../bin/GatherStatusFile.txt
+
+../../utils/ETC/ConfUpdate MASTER_AGENT_VERSION=8.0.10_2 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate MODULE1_AGENT_VERSION=8.0.10_2 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate NFS_STATUS_CHECK_FLAG=0 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate MIN_SMS_INTERVAL=60 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate SOCKET_LOW_SBUF_SIZE=102400 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate SOCKET_LOW_RBUF_SIZE=102400 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate SOCKET_SEND_MAX_SIZE=102400 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate SOCKET_RECV_MAX_SIZE=102400 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate SOCKET_SEND_BUF_SIZE=102400 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate SOCKET_RECV_BUF_SIZE=102400 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate SOCKET_SEND_TRY_COUNT=1000 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate LOG_THREAD=1 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate LOG_COMPRESS=1 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate LOG_THREAD=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate LOG_COMPRESS=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate GATHERRUNTYPE=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate LOGTHREAD=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate SWAP_GATHER_MODE=2 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate CMD_SCHEDULE_TYPE=2 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate CMD_SCHEDULE_TYPE=2 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate DISK_GATHER_WAIT_FLAG=5000 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate SERVER_HEALTH_TIME=300 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate SERVER_HEALTH_NOBUFFER_KSIZE=1000 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate SERVER_HEALTH_DISKOPEN_TYPE=0 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate NETSTAT_GATHER_WAIT_FLAG=200 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate PROCESS_WAIT_COUNT=2000 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate LOG_VALIDDAY=7 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate LOG_VALIDDAY=7 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate NETSTAT_GATHER_API=0 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate CPU_STR_GATHER=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate INTERFACE_STR_GATHER=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate FILESYSTEM_STR_GATHER=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate DISK_STR_GATHER=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate AIX_CPU_USE_TOPAS=0 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate AIX53_MICRO_GATHER=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate PROC_EXTEND_FLAG=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate UPTIME_GTR_FLAG=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate CPU_STR_GATHER=1 ../../MAgent/conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate PACKET_ENCRYPTION_MODE=0 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate PACKET_ENCRYPTION_MODE=0 ../../MAgent/conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate CONN_MANAGER_REQ_INTERVAL=60 ../../MAgent/conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate MANAGER_LIST_REQ_INTERVAL=3600 ../../MAgent/conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate DATABUFFER_SAVE_MAX_SIZE=10 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate DATABUFFER_FILEREAD_SIZE=1000 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate DATABUFFER_SETVB_CNT=100 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate DATABUFFER_VALID_DAY=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate SERVER_HEALTH_CHECK=1,1,1,1 ../../MAgent/conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate SERVER_HEALTH_TIME=300 ../../MAgent/conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate CLUSTER_GATHER_INTERVAL=300 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate OS_SMS_GATHER_INTERVAL=60 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate HP_SFM_GATHER_FLAG=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate HP_SFM_GATHER_INTERVAL=300 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate NETWORK_EXT_GATHER=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate INV_GATHER_TIME=07:00 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate EXCEPT_CONNECTION_CHK_MANAGER_KEY=womsap1p,womsap2p ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate HP_KCUSAGE_INTERVAL=300 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate UTF8_LOGMONITOR_ON=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate HP_DISK_IO_FLAG=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate HP_DISK_STATUS_CLOSED_GATHER=0 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate HP31_DISK_GATHER=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate LOG_ENCODE_OMP_FLAG=1 ../../SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate 4.21=0 ../../SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.22=0 ../../SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.23=0 ../../SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.24=0 ../../SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.42=1 ../../SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.53=1 ../../SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.54=1 ../../SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.41=1 ../../SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 2.18=1 ../../MAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.2=120 ../../SMSAgent/bin/GatherIntervalFile.txt
+../../utils/ETC/ConfUpdate 4.54=120 ../../SMSAgent/bin/GatherIntervalFile.txt
+../../utils/ETC/ConfUpdate 4.53=300 ../../SMSAgent/bin/GatherIntervalFile.txt
+../../utils/INSTALL/dca_patch.sh

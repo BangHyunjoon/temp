@@ -1,0 +1,24 @@
+#./script_ph.sh
+
+OLDHOME=`pwd`
+cd ../..
+NNP_PATH=`pwd`
+cd utils/INSTALL
+../ETC/ConfUpdate MASTER_AGENT_VERSION=R1.4.457 $NNP_PATH/MAgent/conf/MasterAgent.conf
+../ETC/ConfUpdate MODULE1_AGENT_AUTO_RUN=TRUE $NNP_PATH/MAgent/conf/MasterAgent.conf
+../ETC/ConfUpdate AUTO_UPDATE_TIME=7200 $NNP_PATH/MAgent/conf/MasterAgent.conf
+../ETC/ConfUpdate WALK_GATHER_TYPE=1 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate DISK_EXDISK_PERF_FLAG=TRUE $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate CPU_USED_INCLUSIVE_WIO=FALSE $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate NETSTAT_GATHER_TYPE=1 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate GATHERRUNTYPE=1 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate PROJECT_NAME=1 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate GTR_PHYSICAL_CPU_FLAG=0 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate FS_WALK_GATHER_TYPE=1 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate INV_GTR_TIMEOUT=10 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate AGENT_FILTERING_FLAG=TRUE $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate AGENT_FILTERING_INTERVAL=60 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate VMWARE_GTR_FLAG=1 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate VMWARE_GTR_INTERVAL=30 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate LINUX_PROCESS_TYPE=0 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../ETC/ConfUpdate LINUX_PROCESS_JAVA_TYPE=0 $NNP_PATH/SMSAgent/conf/SMSAgent.conf

@@ -1,0 +1,4 @@
+#! /usr/bin/ksh
+echo "rc.atcp1 execute !!" > /tmp/atcp_rst_ckc.log
+/etc/rc.atcp1 >> /tmp/atcp_ckc.log 2>&1 &
+

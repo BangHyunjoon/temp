@@ -1,0 +1,2 @@
+print "GBL_CPU_QUEUE|",GBL_CPU_QUEUE,"|",GBL_PRI_QUEUE
+print "-----"

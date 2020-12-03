@@ -1,0 +1,12 @@
+[Unit]
+Description=polestar smsagent
+
+[Service]
+Type=oneshot
+User=root
+Environment=PATH=/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/bin:/usr/local/sbin
+ExecStart=NULL
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

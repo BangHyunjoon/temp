@@ -1,0 +1,21 @@
+print "GBL_INTERRUPT_RATE=", GBL_INTERRUPT_RATE
+disk loop
+{
+    print BYDSK_DEVNAME , "|",BYDSK_PHYS_READ_BYTE_RATE , "|", BYDSK_PHYS_WRITE_BYTE_RATE, 
+                          "|",BYDSK_PHYS_READ_RATE, "|", BYDSK_PHYS_WRITE_RATE,
+                          "|",BYDSK_UTIL, "|", "na", 
+                          "|", "na", "|","na", 
+                          "|",BYDSK_LOGL_READ_RATE, "|", BYDSK_LOGL_WRITE_RATE,
+                          "|",BYDSK_FS_READ_RATE, "|", BYDSK_FS_WRITE_RATE
+}
+#disk loop
+#{
+#    print BYDSK_DISKNAME, "|",BYDSK_PHYS_READ_BYTE_RATE , "|", BYDSK_PHYS_WRITE_BYTE_RATE,
+#                          "|",BYDSK_PHYS_READ_RATE, "|", BYDSK_PHYS_WRITE_RATE,
+#                          "|",BYDSK_UTIL, "|", BYDSK_AVG_QUEUE_TIME,
+#                          "|", BYDSK_AVG_READ_SERVICE_TIME, "|", BYDSK_AVG_WRITE_SERVICE_TIME,
+#                          "|",BYDSK_LOGL_READ_RATE, "|", BYDSK_LOGL_WRITE_RATE,
+#                          "|",BYDSK_FS_READ_RATE, "|", BYDSK_FS_WRITE_RATE
+#
+#}
+print "-----"

@@ -1,0 +1,14 @@
+[COMMON]
+LOG_MODE=ERROR
+LOG_PATH=/usr/nkia/NNPAgent/utils/POSCO_EVENT_LOG/LOG/
+LOG_VALIDDAY=2
+PRINT=OFF
+LOG_TYPE=0
+LOG_CHECK_TYPE=1
+
+[LOGFILE]
+LOG_NAME_PATTERN_1=/usr/nkia/NNPAgent/POSCO_EVENT_LOG/sample.log
+
+#1 : include hostname
+#0 : exclude hostname
+HOSTNAME_IS_FLAG=0

@@ -1,0 +1,35 @@
+#! /bin/bash
+LIMIT_CNT=0
+while [ ! -f /usr/nkia/EMS7/NNPAgent/MAgent/bin/magentctl ]
+do
+    echo "not found agent binary file!!"
+    if [ $LIMIT_CNT = 500 ]
+    then
+        echo "polestar agent start failed!!"
+        break
+    fi
+    sleep 60
+    LIMIT_CNT=`expr $LIMIT_CNT + 1`
+done
+
+MANAGER_IP=`grep ^MANAGER1_IP /usr/nkia/EMS7/NNPAgent/MAgent/conf/ManagerInfo.conf | awk -F= '{print $2}'`
+MANAGER_PORT=`grep ^MANAGER1_PORT /usr/nkia/EMS7/NNPAgent/MAgent/conf/ManagerInfo.conf | awk -F= '{print $2}'`
+if [ $LIMIT_CNT -lt 500 ]; then
+    while [ 1 ]
+    do
+        LocalIP=`/usr/nkia/EMS7/NNPAgent/utils/INSTALL/getlocalip $MANAGER_IP $MANAGER_PORT | grep LOCALIP | awk -F= '{print $2}'`
+        if [ -n "$LocalIP" ]; then
+            break
+        fi
+    done
+    keycheck=`grep MASTER_AGENT_KEY /usr/nkia/EMS7/NNPAgent/MAgent/conf/MasterAgent.conf | awk -F= '{print $2}'`
+    if [ -z "$keycheck" ];then
+        INSTALLDATE=`date +%Y%m%d%H%M%S`
+        makey=MA_$LocalIP"_"$INSTALLDATE
+        /usr/nkia/EMS7/NNPAgent/utils/ETC/ConfUpdate MASTER_AGENT_KEY=$makey /usr/nkia/EMS7/NNPAgent/MAgent/conf/MasterAgent.conf
+        /usr/nkia/EMS7/NNPAgent/utils/ETC/ConfUpdate MANAGER1_AGENT_IP=$LocalIP /usr/nkia/EMS7/NNPAgent/MAgent/conf/ManagerInfo.conf
+    fi
+    su - root -c "cd /usr/nkia/EMS7/NNPAgent/MAgent/bin; ./magentctl -start > /dev/null 2>&1"
+fi
+su - root -c "cd /usr/nkia/EMS7/NNPAgent/MAgent/bin; ./magentctl -start > /dev/null 2>&1"
+echo "polestar agent start success!!"

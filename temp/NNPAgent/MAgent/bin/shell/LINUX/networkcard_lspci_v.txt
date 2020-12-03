@@ -1,0 +1,7 @@
+	Subsystem: Red Hat, Inc Qemu virtual machine
+	Subsystem: Red Hat, Inc Qemu virtual machine
+	Subsystem: XenSource, Inc. Device 0001
+	Subsystem: XenSource, Inc. Device 0001
+	Subsystem: Red Hat, Inc Qemu virtual machine
+	Subsystem: XenSource, Inc. Device 0001
+	Subsystem: XenSource, Inc. Xen Platform Device

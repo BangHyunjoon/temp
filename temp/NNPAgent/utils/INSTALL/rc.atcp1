@@ -1,0 +1,27 @@
+#! /usr/bin/ksh
+LIMIT_CNT=0
+while [ ! -f /NCIA/POLESTAR/NNPAgent/utils/INSTALL/alt_disk_check.sh ]
+do
+    echo "not found alt-copy-shell file!!"
+    if [ $LIMIT_CNT = 500 ]
+    then
+        echo "alt-copy-shell start failed!!"
+        break
+    fi
+    sleep 10
+    LIMIT_CNT=`expr $LIMIT_CNT + 1`
+done
+
+PS_CHK=`ps -ef | grep -v grep | grep alt_disk_check | wc -l | awk '{print $1}'`
+
+echo "alt-disk-copy-shell start.... [$PS_CHK]"
+
+if [ "$PS_CHK" = "0" ] ; then
+    cd /NCIA/POLESTAR/NNPAgent/utils/INSTALL;/NCIA/POLESTAR/NNPAgent/utils/INSTALL/alt_disk_check.sh
+    echo "alt-disk-copy-shell start success!!"
+else
+    echo "alt-disk-copy-shell already started."
+fi
+
+exit 0
+

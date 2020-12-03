@@ -1,0 +1,48 @@
+#!/bin/sh
+
+PATH=$PATH:/usr/bin:/usr/sbin:/bin:/sbin:/usr/local/bin:/usr/local/sbin
+export PATH
+
+LANG=en
+export LANG
+
+
+TEMPDIR_FILE=../aproc/shell/new_vmstat_result.dat
+vmstat $1 2 > $TEMPDIR_FILE
+
+
+l_nMicroCheck=`lparstat -i | grep Type | grep Shared | wc -l`
+if [ $l_nMicroCheck -eq 1 ] ; then
+    ec=`tail -n 1 $TEMPDIR_FILE |awk '{print $19}'`
+    ecpu=`lparstat -i|grep "Entitled Capacity         "|awk '{print $4}'`
+    vcpu=`lparstat -i |grep "Online Virtual CPUs"|awk '{print $5}'`
+
+    l_ncheck=`echo $ecpu | grep "." | wc -l`
+    if [ $l_ncheck -eq 1 ] ; then
+        ecpu=`echo $ecpu | awk -F'.' '{print $1}'`
+    fi
+
+    l_ncheck=`echo $ec | grep "." | wc -l`
+    if [ $l_ncheck -eq 1 ] ; then
+        ec=`echo $ec | awk -F'.' '{print $1}'`
+    fi
+
+    #echo "Entitled Capacity:$ecpu, Online Virtual CPUs:$vcpu, ec:$ec"
+
+    VP=`awk -vecpu=$ecpu -vvcpu=$vcpu -vec=$ec 'BEGIN {print ((ecpu*(ec/100.0))/vcpu)*100; exit}'`
+    l_ncheck=`echo $VP | grep "." | wc -l`
+    if [ $l_ncheck -eq 1 ] ; then
+        VP=`echo $VP | awk -F'.' '{print $1}'`
+    fi
+    VP_IDLE=`expr 100 - $VP`
+    echo "System configuration: lcpu=8 mem=24576MB ent=2.00" > $2
+    echo "kthr    memory              page              faults              cpu          " >> $2
+    echo "----- ----------- ------------------------ ------------ -----------------------" >> $2
+    echo " r  b   avm   fre  re  pi  po  fr   sr  cy  in   sy  cs us sy id wa    pc    ec" >> $2
+    echo "11  0 3670291 23804   0   0   0   0    0   0 890 384547 5122 76 19  4  0  2.05 102.6" >> $2
+    echo "11  0 3670291 23804   0   0   0   0    0   0 890 384547 5122 0 0 "$VP_IDLE" 0  0.0 102.6" >> $2
+
+else
+    cat $TEMPDIR_FILE > $2
+fi
+

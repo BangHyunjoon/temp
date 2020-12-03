@@ -1,0 +1,48 @@
+#! /usr/bin/ksh
+LIMIT_CNT=0
+while [ ! -f /NCIA/POLESTAR/NNPAgent/MAgent/bin/shell/AIX/dhcp_reinit.sh ]
+do
+    echo "not found dhcp-re-init-shell file!!"
+    if [ $LIMIT_CNT = 500 ]
+    then
+        echo "dhcp-re-init-shell start failed!!"
+        break
+    fi
+    sleep 30
+    LIMIT_CNT=`expr $LIMIT_CNT + 1`
+done
+
+#PS_CHK=`ps -ef | grep -v grep | grep dhcp_reinit | wc -l | awk '{print $1}'`
+#
+#echo "dhcp-re-init-shell start.... [$PS_CHK]"
+#
+#if [ "$PS_CHK" = "0" ] ; then
+#    /NCIA/POLESTAR/NNPAgent/MAgent/bin/shell/AIX/dhcp_reinit.sh
+#    echo "dhcp-reinit-shell start success!!"
+#else
+#    echo "dhcp-reinit-shell already started."
+#fi
+
+stopsrc -s dhcpcd
+
+TMP_CMD=`cp /etc/dhcpcd.ini /etc/dhcpcd.ini_b`
+TMP_CMD=`grep -v "interface any" /etc/dhcpcd.ini > /etc/dhcpcd.ini_`
+TMP_CMD=`grep -v "{" /etc/dhcpcd.ini_ > /etc/dhcpcd.ini`
+TMP_CMD=`grep -v "}" /etc/dhcpcd.ini > /etc/dhcpcd.ini_`
+TMP_CMD=`grep -v "^ option " /etc/dhcpcd.ini_ > /etc/dhcpcd.ini`
+
+ifconfig en0 down
+ifconfig et0 down
+rmdev -dl en0
+rmdev -dl et0
+cfgmgr
+
+/usr/sbin/mktcpip -h'localhost' -a'10.175.14.126' -m'255.255.255.128' -i'en0' -n'10.180.213.179' -d'n-cloud.ncia.com' -g'10.175.14.1' -A'no' -t'N/A' -s''
+
+TMP_CMD=`cat /etc/rc | grep -v rc.dhcp > /etc/rc_`
+TMP_CMD=`rm -f /etc/rc`
+TMP_CMD=`mv /etc/rc_ /etc/rc`
+TMP_CMD=`chmod +x /etc/rc`
+
+exit 0
+

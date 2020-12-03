@@ -1,0 +1,5 @@
+#! /usr/bin/ksh
+echo "rc.dhcp1 execute !!" > /tmp/dhcp_rst_ckc.log
+/etc/rc.dhcp1 >> /tmp/dhcp_ckc.log 2>&1 &
+exit 0
+

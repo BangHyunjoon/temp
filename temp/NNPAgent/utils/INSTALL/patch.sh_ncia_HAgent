@@ -1,0 +1,68 @@
+CUR_PATH=`pwd`
+cd ../..
+NNP_PATH=`pwd`
+cd $CUR_PATH
+
+UNIX95=1
+export UNIX95
+
+../../utils/ETC/ConfUpdate CHECK_INTERVAL=-1 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate CHECK_PS_INTERVAL=3 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate CHECK_AGENT_PS_CMD=1 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate CHECK_INTERVAL=-1 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate CHECK_PS_INTERVAL=3 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+../../utils/ETC/ConfUpdate CHECK_AGENT_PS_CMD=1 $NNP_PATH/SMSAgent/conf/SMSAgent.conf
+
+../../utils/ETC/ConfUpdate MASTER_AGENT_VERSION=R1.5.709V ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate MASTER_AGENT_VERSION=R1.5.709V ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate MODULE1_AGENT_VERSION=R1.5.709V ../conf/MasterAgent.conf
+
+CMD_SCD_PID=`ps -e -o pid -o args | grep -v grep | grep cmd_scd | grep "/4/" | awk -F' ' '{print $1}'`
+if [ $CMD_SCD_PID ] ; then
+    kill -9 $CMD_SCD_PID
+fi
+
+CMD_SCD_PID=`ps -e -o pid -o args | grep -v grep | grep cmd_scd | grep "/2/" | awk -F' ' '{print $1}'`
+if [ $CMD_SCD_PID ] ; then
+    kill -9 $CMD_SCD_PID
+fi
+
+../../utils/ETC/ConfUpdate DNS_SERVER_IP=10.180.213.179 ../conf/MasterAgent.conf
+touch ../bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate BACKUP_NETCHECK=192.168. ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate BACKUP_NETWORK=192.168.0.0 ../conf/MasterAgent.conf
+
+../../utils/ETC/ConfUpdate 2.15=0 ../bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.30=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.33=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.34=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.37=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.41=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.42=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.43=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.44=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.45=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.46=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.47=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.48=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.49=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.50=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.51=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.52=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.53=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.54=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+../../utils/ETC/ConfUpdate 4.55=0 $NNP_PATH/SMSAgent/bin/GatherStatusFile.txt
+
+### RHEV-H Agent ####
+../../utils/ETC/ConfUpdate CHECK_INTERVAL=10 ../conf/MasterAgent.conf
+../../utils/ETC/ConfUpdate MASTER_AGENT_KEY=MA_ ../conf/MasterAgent.conf
+../../MAgent/bin/shell/LINUX/kill_smsagent.sh
+\rm -f ../../utils/AUTOUPDATE/config*.txt
+
+cd ../../SMSAgent/bin
+./shell/LINUX/vminfo_stop.sh
+./shell/LINUX/vminfo_start.sh
+
+cd $CUR_PATH
+
+exit 0

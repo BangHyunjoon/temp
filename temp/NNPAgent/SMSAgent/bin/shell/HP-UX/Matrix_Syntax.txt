@@ -1,0 +1,18 @@
+print "active_proc=",gbl_active_proc
+print "num_user=",gbl_num_user
+print "mem_user_util=",gbl_mem_user_util
+print "mem_sys_and_cache_util=",gbl_mem_sys_and_cache_util
+print "mem_page_request_rate=",gbl_mem_page_request_rate
+print "mem_cache_hit_pct=",gbl_mem_cache_hit_pct
+print "disk_util_peak=",gbl_disk_util_peak
+print "disk_raw_io_rate=",gbl_disk_raw_io_rate
+print "disk_vm_io_rate=",gbl_disk_vm_io_rate
+print "disk_phys_byte_rate=",gbl_disk_phys_byte_rate
+print "fs_space_util_peak=",gbl_fs_space_util_peak
+#print "buffer_cache_used=",tbl_buffer_cache_used
+print "msg_table_util=",tbl_msg_table_util
+print "sem_table_util=",tbl_sem_table_util
+print "shmem_table_util=",tbl_shmem_table_util
+print "gbl_net_outqueue=",gbl_net_outqueue
+#print "--------------------END----------------------------"
+

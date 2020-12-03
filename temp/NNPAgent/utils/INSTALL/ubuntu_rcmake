@@ -1,0 +1,36 @@
+#!/bin/sh
+echo "#! /bin/sh" >> $2
+echo " " >> $2
+echo "### BEGIN INIT INFO" >> $2
+echo "# Provides:          e7cygn" >> $2
+echo "# Required-Start:    \$remote_fs \$all" >> $2
+echo "# Required-Stop:     \$remote_fs \$all" >> $2
+echo "# Default-Start:     2 3 4 5" >> $2
+echo "# Default-Stop:      0 1 6" >> $2
+echo "# Short-Description: polestart start script" >> $2
+echo "# Description:       polestart start script" >> $2
+echo "### END INIT INFO" >> $2
+
+echo " " >> $2
+echo "do_start(){" >> $2
+echo "    /etc/$1" >> $2
+echo "}" >> $2
+echo " " >> $2
+
+echo "case \"\$1\" in" >> $2
+echo "  start)" >> $2
+echo "        do_start" >> $2
+echo "        ;;" >> $2
+echo "  restart|reload|force-reload)" >> $2
+echo "        exit 3" >> $2
+echo "        ;;" >> $2
+echo "  stop|status)" >> $2
+echo "        exit 3" >> $2
+echo "        ;;" >> $2
+echo "  *)" >> $2
+echo "        exit 3" >> $2
+echo "        ;;" >> $2
+echo "esac" >> $2
+
+
+

@@ -1,0 +1,2 @@
+print "G_MEM|", GBL_MEM_CACHE_HIT_PCT, "|", GBL_MEM_USER_UTIL,"|", GBL_MEM_SYS_UTIL,"|", GBL_MEM_QUEUE 
+print "-----"
